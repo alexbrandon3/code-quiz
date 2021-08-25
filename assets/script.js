@@ -1,25 +1,28 @@
 // Timer
 var timeDisplay = document.querySelector("#timer");
-var secondsLeft = 0;
+let secondsLeft = 0;
 timeDisplay.textContent = "Time: " + secondsLeft;
 var currentIndex = 0;
 var correctAnswers = 0;
 var incorrectAnswers = 0;
+var startScreen = document.querySelector("#window");
 //Start button
 var startButton = document.querySelector("#start");
 function startTimer(){
-    var secondsLeft = 75;
-    setInterval(function(){
+    secondsLeft = 75;
+    startScreen.setAttribute('class', 'hide');
+    var countDown = setInterval(function(){
         secondsLeft--;
         timeDisplay.textContent = "Time: " + secondsLeft;
         if (secondsLeft === 0){
             alert('Sorry, you are out of time!');
-          clearInterval(secondsLeft);
+          clearInterval(countDown);
         }
     }, 1000);
+    questionContainer.removeAttribute('class', 'hide');
+    questionContainer.setAttribute('class', 'questions')
 };
 startButton.addEventListener("click", startTimer);
-
 //Sets questions into an array
 var questions = [
     {
@@ -91,9 +94,10 @@ questionContainer.append(answer2);
 questionContainer.append(answer3);
 questionContainer.append(answer4);
 
+questionContainer.setAttribute('class', 'hide');
 //Checks value against questions current index
-function checkAnswer1(){
-    var response = answer1.getAttribute("data-value");
+function checkAnswer(answerNum){
+    var response = answerNum.getAttribute("data-value");
     var rightAnswer = questions[currentIndex].correctAnswer;
     if(response === rightAnswer){
         currentIndex++;
@@ -116,79 +120,15 @@ function checkAnswer1(){
         answer4.textContent = questions[currentIndex].answer4; 
     }
 }
-function checkAnswer2(){
-    var response = answer2.getAttribute("data-value");
-    var rightAnswer = questions[currentIndex].correctAnswer;
-    if(response === rightAnswer){
-        currentIndex++;
-        correctAnswers++;
-        question.textContent = questions[currentIndex].questionText;
-        answer1.textContent = questions[currentIndex].answer1;
-        answer2.textContent = questions[currentIndex].answer2;
-        answer3.textContent = questions[currentIndex].answer3;
-        answer4.textContent = questions[currentIndex].answer4;
-    }
-    else{
-        secondsLeft -= 10;
-        timeDisplay.textContent = "Time: " + secondsLeft;
-        currentIndex++;
-        incorrectAnswers++;
-        question.textContent = questions[currentIndex].questionText;
-        answer1.textContent = questions[currentIndex].answer1;
-        answer2.textContent = questions[currentIndex].answer2;
-        answer3.textContent = questions[currentIndex].answer3;
-        answer4.textContent = questions[currentIndex].answer4;
-    }
-}
-function checkAnswer3(){
-    var response = answer3.getAttribute("data-value");
-    var rightAnswer = questions[currentIndex].correctAnswer;
-    if(response === rightAnswer){
-        currentIndex++;
-        correctAnswers++;
-        question.textContent = questions[currentIndex].questionText;
-        answer1.textContent = questions[currentIndex].answer1;
-        answer2.textContent = questions[currentIndex].answer2;
-        answer3.textContent = questions[currentIndex].answer3;
-        answer4.textContent = questions[currentIndex].answer4;
-    }
-    else{
-        secondsLeft -= 10;
-        timeDisplay.textContent = "Time: " + secondsLeft;
-        currentIndex++;
-        incorrectAnswers++;
-        question.textContent = questions[currentIndex].questionText;
-        answer1.textContent = questions[currentIndex].answer1;
-        answer2.textContent = questions[currentIndex].answer2;
-        answer3.textContent = questions[currentIndex].answer3;
-        answer4.textContent = questions[currentIndex].answer4;;
-    }
-}
-function checkAnswer4(){
-    var response = answer4.getAttribute("data-value");
-    var rightAnswer = questions[currentIndex].correctAnswer;
-    if(response === rightAnswer){
-        currentIndex++;
-        correctAnswers++;
-        question.textContent = questions[currentIndex].questionText;
-        answer1.textContent = questions[currentIndex].answer1;
-        answer2.textContent = questions[currentIndex].answer2;
-        answer3.textContent = questions[currentIndex].answer3;
-        answer4.textContent = questions[currentIndex].answer4;
-    }
-    else{
-        secondsLeft -= 10;
-        timeDisplay.textContent = "Time: " + secondsLeft;
-        currentIndex++;
-        incorrectAnswers++;
-        question.textContent = questions[currentIndex].questionText;
-        answer1.textContent = questions[currentIndex].answer1;
-        answer2.textContent = questions[currentIndex].answer2;
-        answer3.textContent = questions[currentIndex].answer3;
-        answer4.textContent = questions[currentIndex].answer4;;
-    }
-}
-answer1.addEventListener("click", checkAnswer1);
-answer2.addEventListener("click", checkAnswer2);
-answer3.addEventListener("click", checkAnswer3);
-answer4.addEventListener("click", checkAnswer4);
+answer1.addEventListener("click", function(){
+    return checkAnswer(answer1);
+});
+answer2.addEventListener("click", function(){
+    return checkAnswer(answer2);
+});
+answer3.addEventListener("click", function(){
+    return checkAnswer(answer3);
+});
+answer4.addEventListener("click", function(){
+    return checkAnswer(answer4);
+});
