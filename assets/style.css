@@ -59,3 +59,24 @@
     color: var(--light);
 
 }
+.questions{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+
+}
+.questions h2{
+    width: 100%;
+    justify-content: center;
+    display: inline-block;
+    text-align: center;
+}
+.questions button{
+    width: 7%;
+    border-radius: .25em;
+    background-color: var(--primary);
+    color: var(--light);
+    margin: 25px;
+    margin-top: 15px;
+}
