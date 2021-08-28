@@ -121,28 +121,30 @@ function storeRecord(){
 //Checks value against questions current index
 function checkAnswer(answerNum){
     var response = answerNum.getAttribute("data-value");
-    if(currentIndex === 5){
-        timeDisplay.setAttribute('class', 'hide');
-        score = secondsLeft;
-        var scoreDisplay = document.getElementById("score-display");
-        scoreDisplay.textContent = "Your final score is " + score + ".";
-        questionContainer.setAttribute('class', 'hide');
-        submissionScreen.setAttribute('class', 'final-window');
-        // /* return */ storeRecord();
-        console.log('lastAttempt.score');
-        console.log('lastAttempt.initials');
-        return;
-    }
     var rightAnswer = questions[currentIndex].correctAnswer;
-  
     if(response === rightAnswer){
         currentIndex++;
         correctAnswers++;
+        if(currentIndex === 5){
+            timeDisplay.setAttribute('class', 'hide');
+            score = secondsLeft;
+            var scoreDisplay = document.getElementById("score-display");
+            scoreDisplay.textContent = "Your final score is " + score + ".";
+            questionContainer.setAttribute('class', 'hide');
+            submissionScreen.setAttribute('class', 'final-window');
+            console.log('lastAttempt.score');
+            console.log('lastAttempt.initials');
+            return;
+        }
         question.textContent = questions[currentIndex].questionText;
         answer1.textContent = questions[currentIndex].answer1;
         answer2.textContent = questions[currentIndex].answer2;
         answer3.textContent = questions[currentIndex].answer3;
         answer4.textContent = questions[currentIndex].answer4;
+        answer1.setAttribute("data-value", questions[currentIndex].answer1);
+        answer2.setAttribute("data-value", questions[currentIndex].answer2);
+        answer3.setAttribute("data-value", questions[currentIndex].answer3);
+        answer4.setAttribute("data-value", questions[currentIndex].answer4);
     }
     else{
         secondsLeft -= 10;
@@ -150,13 +152,23 @@ function checkAnswer(answerNum){
         currentIndex++;
         incorrectAnswers++;
         if(currentIndex === 5){
+            timeDisplay.setAttribute('class', 'hide');
+            score = secondsLeft;
+            var scoreDisplay = document.getElementById("score-display");
+            scoreDisplay.textContent = "Your final score is " + score + ".";
+            questionContainer.setAttribute('class', 'hide');
+            submissionScreen.setAttribute('class', 'final-window');
             return;
         }
         question.textContent = questions[currentIndex].questionText;
         answer1.textContent = questions[currentIndex].answer1;
         answer2.textContent = questions[currentIndex].answer2;
         answer3.textContent = questions[currentIndex].answer3;
-        answer4.textContent = questions[currentIndex].answer4; 
+        answer4.textContent = questions[currentIndex].answer4;
+        answer1.setAttribute("data-value", questions[currentIndex].answer1);
+        answer2.setAttribute("data-value", questions[currentIndex].answer2);
+        answer3.setAttribute("data-value", questions[currentIndex].answer3);
+        answer4.setAttribute("data-value", questions[currentIndex].answer4); 
     }
 }
 answer1.addEventListener("click", function(){
@@ -172,28 +184,5 @@ answer4.addEventListener("click", function(){
     return checkAnswer(answer4);
 });
 
-//Saves score and initials
-
-
-
-
-// localStorage.setItem("initials", JSON.stringify(initials));
-// console.log(initials);
-
 var submitButton = document.querySelector('#submit-btn');
 submitButton.addEventListener('click', storeRecord);
-
-// function saveScore() {
-//     localStorage.setItem('score', JSON.stringify(score));
-//     localStorage.setItem("initials", JSON.stringify(initials));
-// } 
-// function renderSubmission() {
-//     // Use JSON.parse() to convert text to JavaScript object
-//     initials = JSON.parse(localStorage.getItem("initials"));
-//     score = JSON.parse(localStorage.getItem("score"));
-//     // Check if data is returned, if not exit out of the function
-    
-// }
-
-
-
