@@ -1,0 +1,188 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+:root {
+    --primary: #6f04b6;
+    --light: white;
+  }
+.hide{
+    display: none !important;
+}
+.conceal{
+    display: none;
+}
+#top-panel{
+    text-align: center;
+    max-width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+   
+}
+#top-panel h2 a{
+    text-decoration: none;
+    color: black;
+}
+#view-scores{
+    width: 15%; 
+    font-size: 1rem;
+    font-weight: 100;
+    text-align: left;
+    padding: 3px;
+}
+#timer{
+    width: 15%;
+    font-size: 1rem;
+    font-weight: 100;
+    text-align: right;
+    padding: 3px;
+    padding-right: 7px;
+
+}
+#window{
+    max-width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+#window h2{
+    justify-content: center;
+    max-width: 60%;
+    padding-top: 40px;
+}
+#window h3{
+    max-width: 60%;
+    padding: 20px 0 30px 0;
+    font-size: 1rem;
+    font-weight: 100;
+}
+#start{
+    width: 7%;
+    border-radius: .25em;
+    background-color: var(--primary);
+    color: var(--light);
+
+}
+.questions{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 40px;
+    flex-direction: column;
+}
+.questions h2{
+    width: 100%;
+    justify-content: center;
+    display: inline-block;
+    text-align: center;
+}
+.questions button{
+    width: 10%;
+    border-radius: .25em;
+    background-color: var(--primary);
+    color: var(--light);
+    margin: 10px;
+}
+.score-greeting{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    padding-top: 85px;
+    align-items: center;
+    justify-content: center;
+}
+.score-greeting h2{
+    width: 60%;
+    font-weight: bold;
+    text-align: center;
+    font-size: 2rem;
+}
+.score-container{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    padding-top: 40px;
+    align-items: center;
+    justify-content: center;
+    height: 225px;
+}
+.score-container ol{
+    min-width: 224px;
+    text-align: center;
+    margin: 3px 50%;
+    background-color: rgb(194, 194, 194);
+
+}
+.score-container ol li{
+    color: black;
+    padding: 4px 80px 4px 2px;
+}
+.score-btn{
+    width: 7%;
+    border-radius: .25em;
+    background-color: var(--primary);
+    color: var(--light);
+    margin: 6px;
+    margin-top: 15px;
+}
+#back-btn a{
+    color: var(--light);
+    text-decoration: none;
+}
+#clear-btn{
+    width: 15%;
+}
+.final-window{
+    max-width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+.final-window h2{
+    justify-content: center;
+    max-width: 60%;
+    padding-top: 40px;
+
+}
+.final-window h3{
+    max-width: 60%;
+    padding: 35px 0 30px 0;
+    font-size: 1.25rem;
+    font-weight: 100;
+}
+.submission-container{
+    min-width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    font-size: 0;
+    line-height: 0;
+}
+.submission-container a{
+    text-decoration: none;
+    color: var(--light);
+}
+.submission-container button{
+    width: 5%;
+    height: 25px;
+    border-radius: .25em;
+    background-color: var(--primary);
+    color: var(--light);
+    margin-left: 5px;
+}
+.submission-container input{
+    display: block;
+}

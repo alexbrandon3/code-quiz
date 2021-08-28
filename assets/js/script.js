@@ -1,26 +1,31 @@
 // Timer
+var submissionScreen = document.querySelector('#final-window');
+// submissionScreen.setAttribute('class', 'hide');
 var timeDisplay = document.querySelector("#timer");
 let secondsLeft = 0;
 timeDisplay.textContent = "Time: " + secondsLeft;
 var currentIndex = 0;
 var correctAnswers = 0;
 var incorrectAnswers = 0;
+var score;
 var startScreen = document.querySelector("#window");
+
 //Start button
 var startButton = document.querySelector("#start");
-function startTimer(){
+function startTimer(event){
+    event.stopPropagation();
     secondsLeft = 75;
     startScreen.setAttribute('class', 'hide');
     var countDown = setInterval(function(){
         secondsLeft--;
         timeDisplay.textContent = "Time: " + secondsLeft;
         if (secondsLeft === 0){
-            alert('Sorry, you are out of time!');
+            alert('Sorry, you are out of time! Finish your attempt and try again for a better score.');
           clearInterval(countDown);
         }
     }, 1000);
     questionContainer.removeAttribute('class', 'hide');
-    questionContainer.setAttribute('class', 'questions')
+    questionContainer.setAttribute('class', 'questions');
 };
 startButton.addEventListener("click", startTimer);
 //Sets questions into an array
@@ -93,12 +98,43 @@ questionContainer.append(answer1);
 questionContainer.append(answer2);
 questionContainer.append(answer3);
 questionContainer.append(answer4);
-
 questionContainer.setAttribute('class', 'hide');
+
+
+
+function storeRecord(){
+    // var attempt = [];
+    var attempt = JSON.parse(localStorage.getItem("attempt")) || [];
+    var initials = document.querySelector('#initials').value;
+    var newAttempt = {
+        score: score,
+        initials: initials,
+    };
+    attempt.push(newAttempt);
+    console.log(score, initials);
+    // Use .setItem() to store object in storage and JSON.stringify to convert it as a string
+    localStorage.setItem("attempt", JSON.stringify(attempt));
+    window.location.replace("scores.html");
+
+}
+
 //Checks value against questions current index
 function checkAnswer(answerNum){
     var response = answerNum.getAttribute("data-value");
+    if(currentIndex === 5){
+        timeDisplay.setAttribute('class', 'hide');
+        score = secondsLeft;
+        var scoreDisplay = document.getElementById("score-display");
+        scoreDisplay.textContent = "Your final score is " + score + ".";
+        questionContainer.setAttribute('class', 'hide');
+        submissionScreen.setAttribute('class', 'final-window');
+        // /* return */ storeRecord();
+        console.log('lastAttempt.score');
+        console.log('lastAttempt.initials');
+        return;
+    }
     var rightAnswer = questions[currentIndex].correctAnswer;
+  
     if(response === rightAnswer){
         currentIndex++;
         correctAnswers++;
@@ -113,6 +149,9 @@ function checkAnswer(answerNum){
         timeDisplay.textContent = "Time: " + secondsLeft;
         currentIndex++;
         incorrectAnswers++;
+        if(currentIndex === 5){
+            return;
+        }
         question.textContent = questions[currentIndex].questionText;
         answer1.textContent = questions[currentIndex].answer1;
         answer2.textContent = questions[currentIndex].answer2;
@@ -132,3 +171,29 @@ answer3.addEventListener("click", function(){
 answer4.addEventListener("click", function(){
     return checkAnswer(answer4);
 });
+
+//Saves score and initials
+
+
+
+
+// localStorage.setItem("initials", JSON.stringify(initials));
+// console.log(initials);
+
+var submitButton = document.querySelector('#submit-btn');
+submitButton.addEventListener('click', storeRecord);
+
+// function saveScore() {
+//     localStorage.setItem('score', JSON.stringify(score));
+//     localStorage.setItem("initials", JSON.stringify(initials));
+// } 
+// function renderSubmission() {
+//     // Use JSON.parse() to convert text to JavaScript object
+//     initials = JSON.parse(localStorage.getItem("initials"));
+//     score = JSON.parse(localStorage.getItem("score"));
+//     // Check if data is returned, if not exit out of the function
+    
+// }
+
+
+
