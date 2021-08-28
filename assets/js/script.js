@@ -154,8 +154,15 @@ function checkAnswer(answerNum){
         if(currentIndex === 5){
             timeDisplay.setAttribute('class', 'hide');
             score = secondsLeft;
-            var scoreDisplay = document.getElementById("score-display");
-            scoreDisplay.textContent = "Your final score is " + score + ".";
+            if(score <= 0){
+                var scoreDisplay = document.getElementById("score-display");
+                scoreDisplay.textContent = "Your final score is 0.";
+            }
+            else{
+                var scoreDisplay = document.getElementById("score-display");
+                scoreDisplay.textContent = "Your final score is " + score + ".";
+            }
+            
             questionContainer.setAttribute('class', 'hide');
             submissionScreen.setAttribute('class', 'final-window');
             return;
