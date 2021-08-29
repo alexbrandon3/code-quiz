@@ -106,15 +106,20 @@ function storeRecord(){
     // var attempt = [];
     var attempt = JSON.parse(localStorage.getItem("attempt")) || [];
     var initials = document.querySelector('#initials').value;
-    var newAttempt = {
-        score: score,
-        initials: initials,
-    };
-    attempt.push(newAttempt);
-    console.log(score, initials);
-    // Use .setItem() to store object in storage and JSON.stringify to convert it as a string
-    localStorage.setItem("attempt", JSON.stringify(attempt));
-    window.location.replace("scores.html");
+    if(initials === ""){
+        alert('Please enter your initials to submit your score.');
+    }
+    else{    
+        var newAttempt = {
+            score: score,
+            initials: initials,
+        };
+        attempt.push(newAttempt);
+        console.log(score, initials);
+        // Use .setItem() to store object in storage and JSON.stringify to convert it as a string
+        localStorage.setItem("attempt", JSON.stringify(attempt));
+        window.location.replace("scores.html");
+    }
 
 }
 
@@ -128,6 +133,7 @@ function checkAnswer(answerNum){
         if(currentIndex === 5){
             timeDisplay.setAttribute('class', 'hide');
             score = secondsLeft;
+            secondsLeft = null;
             var scoreDisplay = document.getElementById("score-display");
             scoreDisplay.textContent = "Your final score is " + score + ".";
             questionContainer.setAttribute('class', 'hide');
@@ -154,6 +160,7 @@ function checkAnswer(answerNum){
         if(currentIndex === 5){
             timeDisplay.setAttribute('class', 'hide');
             score = secondsLeft;
+            secondsLeft = null;
             if(score <= 0){
                 var scoreDisplay = document.getElementById("score-display");
                 scoreDisplay.textContent = "Your final score is 0.";
