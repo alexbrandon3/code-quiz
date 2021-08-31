@@ -138,8 +138,6 @@ function checkAnswer(answerNum){
             scoreDisplay.textContent = "Your final score is " + score + ".";
             questionContainer.setAttribute('class', 'hide');
             submissionScreen.setAttribute('class', 'final-window');
-            console.log('lastAttempt.score');
-            console.log('lastAttempt.initials');
             return;
         }
         question.textContent = questions[currentIndex].questionText;
