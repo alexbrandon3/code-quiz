@@ -2,7 +2,6 @@
 var attempt = JSON.parse(localStorage.getItem("attempt")) || [];
 //Logs initials and score to high score page
 var scoreboard = document.getElementById("scoreboard");
-console.log(attempt);
 if(!attempt[0]){
     var record = document.createElement('li');
     record.textContent = 'Be the first to play!';
